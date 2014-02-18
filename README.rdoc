@@ -6,7 +6,7 @@ For Redmine versions prior to 2.x, check out the pre-2.x branch.
 
 A user is involved in the issue if he/she either is the author of the
 issue, or is assigned to the issue or has updated the issue at least
-once.
+once or is watching the issue.
 
 Adds "My involvement" filter for issue queries with a bool option:
 either "is involved" or "is not involved".

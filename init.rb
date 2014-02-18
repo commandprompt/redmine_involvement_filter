@@ -10,7 +10,7 @@ Redmine::Plugin.register :redmine_involvement_filter do
 end
 
 prepare_block = Proc.new do
-  Query.send(:include, RedmineInvolvementFilter::QueryPatch)
+  IssueQuery.send(:include, RedmineInvolvementFilter::IssueQueryPatch)
 end
 
 if Rails.env.development?

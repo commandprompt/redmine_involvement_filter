@@ -1,5 +1,5 @@
 module RedmineInvolvementFilter
-  module QueryPatch
+  module IssueQueryPatch
     unloadable
 
     def self.included(base)
@@ -34,15 +34,23 @@ module RedmineInvolvementFilter
         cond = 'AND'
       end
 
-      issue_ids_sql = %(
+      journalized_issue_ids_sql = %(
 SELECT DISTINCT journalized_id
   FROM #{Journal.table_name}
  WHERE journalized_type='Issue'
    AND user_id IN #{user_ids}
 )
+      watched_issue_ids_sql = %(
+SELECT DISTINCT watchable_id
+  FROM #{Watcher.table_name}
+ WHERE watchable_type='Issue'
+   AND user_id IN #{user_ids}
+)
+
       sql = ["#{Issue.table_name}.assigned_to_id #{inop} #{user_ids}",
              "#{Issue.table_name}.author_id #{inop} #{user_ids}",
-             "#{Issue.table_name}.id #{inop} (#{issue_ids_sql})"].join(" #{cond} ")
+             "#{Issue.table_name}.id #{inop} (#{journalized_issue_ids_sql})",
+             "#{Issue.table_name}.id #{inop} (#{watched_issue_ids_sql})"].join(" #{cond} ")
 
       "(#{sql})"
     end
