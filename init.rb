@@ -4,9 +4,9 @@ Redmine::Plugin.register :redmine_involvement_filter do
   name 'Redmine Issue Involvement Filter plugin'
   author 'Alex Shulgin <ash@commandprompt.com>'
   description 'A plugin to filter out issues in which the current user is involved.'
-  version '0.2.0'
-#  url 'http://example.com/path/to/plugin'
-#  author_url 'http://example.com/about'
+  version '0.2.1'
+  url 'https://github.com/commandprompt/redmine_involvement_filter'
+  author_url 'https://commandprompt.com'
 end
 
 prepare_block = Proc.new do

@@ -15,8 +15,10 @@ module RedmineInvolvementFilter
 
       if User.current.logged?
         filter = @available_filters['involved_user_id'] = @available_filters['assigned_to_id'].dup
-        filter[:name] = l('field_involved_users')
-        filter[:type] = :list
+        filter_options = filter.instance_variable_get('@options')
+        filter_options[:name] = l('field_involved_users')
+        filter_options[:type] = :list
+        filter.instance_variable_set('@options', filter_options)
       end
 
       @available_filters
